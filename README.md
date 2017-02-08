@@ -1,3 +1,5 @@
 # Budget
-monthly budget application
-Incomplete (Still in Development)
+
+Monthly budget application - Incomplete (Still Developing)
+
+Application will save company and billing information.
