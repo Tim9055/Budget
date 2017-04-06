@@ -1,0 +1,65 @@
+﻿@model IEnumerable<Budget.Entities.Bill>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Company.Name)
+        </th>
+        <th class="text-right">
+            @Html.DisplayNameFor(model => model.AmountDue)
+        </th>
+        <th class="text-right">
+            @Html.DisplayNameFor(model => model.AmountPaid)
+        </th>
+        <th class="text-right">
+            @Html.DisplayNameFor(model => model.AmountOwed)
+        </th>
+        <th class="text-right">
+            @Html.DisplayNameFor(model => model.DateDue)
+        </th>
+        <th class="text-right">
+            @Html.DisplayNameFor(model => model.DatePaid)
+        </th>
+        <th class="text-center">@Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-default" })</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Company.Name)
+            </td>
+            <td class="text-right" data-bill-id="@item.BillId" data-bill-item="AmountDue">
+                <span>@Html.DisplayFor(modelItem => item.AmountDue)</span>
+            </td>
+            <td class="text-right" data-bill-id="@item.BillId" data-bill-item="AmountPaid">
+                <span>@Html.DisplayFor(modelItem => item.AmountPaid)</span>
+            </td>
+            <td class="text-right" data-bill-id="@item.BillId" data-bill-item="AmountOwed">
+                <span>@Html.DisplayFor(modelItem => item.AmountOwed)</span>
+            </td>
+            <td class="text-right" data-bill-id="@item.BillId" data-bill-item="DateDue">
+                <span>@Html.DisplayFor(modelItem => item.DateDue)</span>
+            </td>
+            <td class="text-right" data-bill-id="@item.BillId" data-bill-item="DatePaid">
+                <span>@Html.DisplayName(item.DatePaid.Equals(DateTime.Parse("1/1/1900")) ? "" : item.DatePaid.ToString("MM/dd/yyyy"))</span>
+            </td>
+            <td class="text-center">
+                @Html.ActionLink("Edit", "Edit", new { id = item.BillId }, new { @class = "btn btn-default btn-xs" })
+                @Html.ActionLink("Details", "Details", new { id = item.BillId }, new { @class = "btn btn-default btn-xs" })
+                @Html.ActionLink("Delete", "Delete", new { id = item.BillId }, new { @class = "btn btn-default btn-xs" })
+            </td>
+        </tr>
+    }
+    <tr>
+        <td>Total</td>
+        <td class="text-right">@ViewBag.totalDue</td>
+        <td class="text-right">@ViewBag.totalPaid</td>
+        <td class="text-right">@ViewBag.totalOwed</td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+
+</table>
+

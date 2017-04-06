@@ -1,0 +1,47 @@
+﻿@using System.Web.UI.WebControls
+@model IEnumerable<Budget.Entities.Bill>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<form method="post" action="@Url.Action("Index", "Bills")">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                <h2>Bills for @ViewBag.monthYear</h2>
+                <div class="statusUpdates"></div>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 form-inline">
+                <div class="date-button">
+                    <select id="searchMonthYear" name="searchMonthYear" class="form-control">
+                        @foreach (var x in ViewBag.ddlSearchMonthYear)
+                        {
+                            if (x.Selected)
+                            {
+                                @:<option value="@x.Value" Selected="Selected">@x.Text</option>
+                            }
+                            else
+                            {
+                                @:<option value="@x.Value">@x.Text</option>
+                            }
+                        }
+                    </select>
+                    <button id="btnSubmit" type="submit" class="btn btn-primary">Change Month</button>
+                    @if (Model.Count() == 0)
+                    {
+                        <button id="btnPopulateBills" type="button" class="btn btn-primary">Populate Bills</button>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<div id="tableData" class="clickToEdit">
+    @RenderPage("_BillsTableData.cshtml",Model)
+</div>
+
+@section scripts {
+
+    <script src="~/Scripts/Bills/index.js"></script>
+}
